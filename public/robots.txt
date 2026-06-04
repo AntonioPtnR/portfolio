@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://antoniopaton.com/sitemap-index.xml
+Sitemap: https://antoniopr.pages.dev/sitemap-index.xml
