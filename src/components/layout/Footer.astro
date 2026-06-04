@@ -1,0 +1,18 @@
+---
+interface Props {
+  t: (key: string) => string;
+}
+
+const { t } = Astro.props;
+---
+
+<footer class="border-t border-[var(--color-border)] bg-[var(--color-bg)]">
+  <div class="site-shell flex flex-col items-center gap-1.5 py-8 text-center sm:flex-row sm:justify-between">
+    <p class="text-sm text-[var(--color-text-tertiary)]">
+      {t("footer.copyright")}
+    </p>
+    <p class="text-xs text-[var(--color-text-tertiary)] opacity-60">
+      {t("footer.construido")}
+    </p>
+  </div>
+</footer>

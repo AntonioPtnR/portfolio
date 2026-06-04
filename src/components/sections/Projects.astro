@@ -1,0 +1,153 @@
+---
+interface Project {
+  title: string;
+  description: string;
+  tech: string[];
+  category?: string;
+  image?: string;
+  imageAlt?: string;
+  demoUrl?: string;
+  repoUrl?: string;
+  featured: boolean;
+}
+
+interface Props {
+  projects: Project[];
+  t: (key: string) => string;
+}
+
+const { projects, t } = Astro.props;
+
+// Derive unique categories from projects
+const allCategories = [...new Set(projects.map((p) => p.category).filter((c): c is string => !!c))];
+
+const filterLabels: string[] = [t("portfolio.todos"), ...allCategories.sort()];
+const filterValues: string[] = ["all", ...allCategories.sort().map((c) => c.toLowerCase())];
+---
+
+<section id="portfolio" class="bg-[var(--color-bg)]">
+  <div class="site-shell py-20 sm:py-28">
+    <div class="mb-10 flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between animate-fade-up" style="--i:0">
+      <div class="flex items-center gap-3">
+        <span class="text-2xl">🛠️</span>
+        <h2 class="text-2xl font-bold tracking-tight sm:text-3xl">{t("portfolio.titulo")}</h2>
+      </div>
+
+      <!-- Filter buttons -->
+      <div class="flex flex-wrap gap-2" role="group" aria-label={t("portfolio.filtrar")}>
+        {
+          filterLabels.map((label, idx) => {
+            const isActive = idx === 0;
+            const activeClasses = "bg-[var(--color-primary)] border-[var(--color-primary)] text-white";
+            const inactiveClasses = "border-[var(--color-border)] text-[var(--color-text-tertiary)] hover:border-[var(--color-primary)] hover:text-[var(--color-primary)]";
+            return (
+              <button
+                type="button"
+                class={`filter-btn rounded-lg border px-3.5 py-1.5 text-xs font-semibold transition-all duration-200 ${isActive ? activeClasses : inactiveClasses}`}
+                data-filter={filterValues[idx]}
+                aria-pressed={isActive ? "true" : "false"}
+              >
+                {label}
+              </button>
+            );
+          })
+        }
+      </div>
+    </div>
+
+    <!-- Project grid -->
+    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        projects.map((p, idx) => (
+          <article
+            class="project-card card-premium group flex flex-col overflow-hidden rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] hover-lift hover-glow animate-fade-up"
+            style={`--i:${idx + 1}; animation-delay: ${(idx + 1) * 100}ms`}
+            data-category={p.category ? p.category.toLowerCase() : ""}
+          >
+            <!-- Image placeholder -->
+            <div class="flex h-44 items-center justify-center bg-[var(--color-surface-muted)]">
+              {p.image ? (
+                <img src={p.image} alt={p.imageAlt ?? p.title} class="h-full w-full object-cover" />
+              ) : (
+                <span class="text-4xl opacity-20">📁</span>
+              )}
+            </div>
+
+            <div class="flex flex-1 flex-col gap-3 p-5">
+              <h3 class="text-base font-semibold text-[var(--color-text)] group-hover:text-[var(--color-primary)] transition-colors">
+                {p.title}
+              </h3>
+              <p class="text-sm text-[var(--color-text-tertiary)] leading-relaxed flex-1">{p.description}</p>
+
+              <div class="flex flex-wrap gap-1.5">
+                {p.tech.map((tech) => (
+                  <span class="rounded-md border border-[var(--color-border)] bg-[var(--color-surface-muted)] px-2 py-0.5 text-xs font-medium text-[var(--color-text-tertiary)]">
+                    {tech}
+                  </span>
+                ))}
+              </div>
+
+              <div class="mt-1 flex gap-3">
+                {p.demoUrl && (
+                  <a href={p.demoUrl} target="_blank" rel="noopener noreferrer" class="text-xs font-semibold text-[var(--color-primary)] hover:text-[var(--color-primary-hover)] transition-colors">
+                    {t("portfolio.demo")}
+                  </a>
+                )}
+                {p.repoUrl && (
+                  <a href={p.repoUrl} target="_blank" rel="noopener noreferrer" class="text-xs font-medium text-[var(--color-text-tertiary)] hover:text-[var(--color-text)] transition-colors">
+                    {t("portfolio.codigo")}
+                  </a>
+                )}
+              </div>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<script>
+  // Inline vanilla JS filter
+  const filterButtons = document.querySelectorAll(".filter-btn");
+  const projectCards = document.querySelectorAll(".project-card");
+
+  const activeClasses = [
+    "bg-[var(--color-primary)]",
+    "border-[var(--color-primary)]",
+    "text-white",
+  ];
+
+  filterButtons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const filter = btn.getAttribute("data-filter");
+
+      // Update active state on all buttons
+      const inactiveClasses = [
+        "border-[var(--color-border)]",
+        "text-[var(--color-text-tertiary)]",
+        "hover:border-[var(--color-primary)]",
+        "hover:text-[var(--color-primary)]",
+      ];
+      filterButtons.forEach((b) => {
+        b.setAttribute("aria-pressed", "false");
+        activeClasses.forEach((c) => b.classList.remove(c));
+        inactiveClasses.forEach((c) => b.classList.add(c));
+      });
+      btn.setAttribute("aria-pressed", "true");
+      activeClasses.forEach((c) => btn.classList.add(c));
+      inactiveClasses.forEach((c) => btn.classList.remove(c));
+
+      // Show/hide cards
+      projectCards.forEach((card) => {
+        const el = card as HTMLElement;
+        const cat = el.getAttribute("data-category");
+        if (filter === "all" || cat === filter) {
+          el.style.display = "";
+        } else {
+          el.style.display = "none";
+        }
+      });
+    });
+  });
+</script>

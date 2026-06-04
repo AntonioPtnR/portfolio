@@ -1,0 +1,59 @@
+schema: spec-driven
+
+context: |
+  Tech stack: Astro 5 static site (SSG), Tailwind CSS 4 via @tailwindcss/vite, React 19 islands, Astro Content Collections, npm.
+  Architecture: single-page portfolio with Hero, Education Timeline, Experience Timeline, Projects, and Contact sections.
+  Theming: dark/light mode via CSS custom properties and data-theme.
+  Content: markdown collections validated with Zod schemas in src/content/config.ts.
+  Runtime: Node >= 20.
+
+strict_tdd: false
+
+testing:
+  detected: 2026-06-03
+  test_runner:
+    command: none
+    framework: none
+  test_layers:
+    unit:
+      available: false
+      tool: none
+    integration:
+      available: false
+      tool: none
+    e2e:
+      available: false
+      tool: none
+  coverage:
+    available: false
+    command: none
+  quality_tools:
+    linter:
+      available: false
+      command: none
+    type_checker:
+      available: true
+      command: npm run build # astro check && astro build
+    formatter:
+      available: false
+      command: none
+
+rules:
+  proposal:
+    - Include rollback plan for risky changes.
+  specs:
+    - Use Given/When/Then for scenarios.
+    - Use RFC 2119 keywords (MUST, SHALL, SHOULD, MAY).
+  design:
+    - Include rationale for architectural decisions.
+  tasks:
+    - Group by phase and keep tasks completable in one session.
+  apply:
+    - Follow existing Astro, React, and Tailwind patterns.
+    - Treat strict TDD as disabled unless a real test runner is added.
+  verify:
+    test_command: npm run build
+    build_command: npm run build
+    coverage_threshold: 0
+  archive:
+    - Warn before merging destructive deltas.

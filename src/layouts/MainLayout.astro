@@ -1,0 +1,59 @@
+---
+import "~/styles/global.css";
+import Header from "~/components/layout/Header.astro";
+import Footer from "~/components/layout/Footer.astro";
+
+interface Props {
+  lang: string;
+  t: (key: string) => string;
+}
+
+const { lang, t } = Astro.props;
+---
+
+<!doctype html>
+<html lang={lang} class="scripting-enabled">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={t("seo.descripcion")} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{t("seo.titulo")}</title>
+
+    <!-- Canonical hreflang links -->
+    <link rel="alternate" hreflang="es" href="https://antoniopaton.com/es/" />
+    <link rel="alternate" hreflang="en" href="https://antoniopaton.com/en/" />
+    <link rel="alternate" hreflang="ca" href="https://antoniopaton.com/ca/" />
+    <link rel="alternate" hreflang="x-default" href="https://antoniopaton.com/es/" />
+
+    <!-- Anti-FOUC: apply theme before first paint -->
+    <script is:inline>
+      (function () {
+        const stored = localStorage.getItem("theme");
+        const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        if (stored === "dark" || (!stored && prefersDark)) {
+          document.documentElement.setAttribute("data-theme", "dark");
+        } else if (stored === "light") {
+          document.documentElement.setAttribute("data-theme", "light");
+        }
+        // Always reveal, even if JS fails or is disabled
+        document.documentElement.classList.replace("scripting-enabled", "theme-ready");
+      })();
+    </script>
+
+    <!-- Fallback: reveal content if JS is disabled -->
+    <noscript>
+      <style>
+        html.scripting-enabled { visibility: visible; }
+      </style>
+    </noscript>
+  </head>
+  <body class="min-h-screen bg-[var(--color-bg)] text-[var(--color-text)] antialiased transition-colors duration-300">
+    <a href="#main-content" class="skip-link">{t("a11y.skip")}</a>
+    <Header lang={lang} t={t} />
+    <main id="main-content">
+      <slot />
+    </main>
+    <Footer t={t} />
+  </body>
+</html>

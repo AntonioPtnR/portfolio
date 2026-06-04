@@ -1,0 +1,94 @@
+---
+import TerminalCard from "~/components/ui/TerminalCard.astro";
+
+interface Props {
+  t: (key: string) => string;
+}
+
+const { t } = Astro.props;
+
+const techBadges = ["PHP", "Laravel", "React", "Next.js", "TypeScript", "Docker"];
+
+const socialLinks = [
+  { label: "GitHub", url: "https://github.com/AntonioPtnR" },
+  { label: "LinkedIn", url: "https://www.linkedin.com/in/antoniopatonrico/" },
+  { label: "CV", url: "/cv.pdf" },
+];
+---
+
+<section id="hero" class="hero-premium relative overflow-hidden bg-[var(--color-bg)]">
+  <div class="site-shell relative z-[1] pb-20 pt-24 sm:pt-32 sm:pb-28">
+    <div class="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
+      <!-- Left column: copy -->
+      <div class="flex flex-col gap-6 animate-fade-up" style="--i:0">
+        <p class="text-sm font-semibold tracking-[0.2em] text-[var(--color-primary)] uppercase">
+          {t("hero.hola-soy")}
+        </p>
+
+        <h1
+          class="text-[clamp(3rem,8vw,6rem)] font-black leading-[0.95] tracking-tight"
+          style="text-shadow: 0 0 80px rgba(59,130,246,0.4), 0 0 40px rgba(59,130,246,0.2);"
+        >
+          Antonio
+        </h1>
+
+        <p class="text-xl sm:text-2xl font-medium text-[var(--color-text-secondary)]">
+          {t("hero.ingeniero-de")}{t("hero.ingeniero-de") ? " " : ""}
+          <span class="text-[var(--color-primary)] font-semibold">{t("hero.software")}</span>
+        </p>
+
+        <p class="max-w-md text-base text-[var(--color-text-tertiary)] leading-relaxed">
+          {t("hero.bio")}
+        </p>
+
+        <!-- CTAs -->
+        <div class="flex flex-wrap items-center gap-3">
+          <a
+            href="#portfolio"
+            class="inline-flex items-center gap-2 rounded-lg bg-[var(--color-primary)] px-5 py-2.5 text-sm font-semibold text-white shadow-sm shadow-[var(--color-primary)]/25 hover:bg-[var(--color-primary-hover)] hover:shadow-[var(--color-primary)]/40 transition-all duration-200"
+          >
+            {t("hero.ver-proyectos")}
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4">
+              <line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/>
+            </svg>
+          </a>
+          <a
+            href="#contacto"
+            class="inline-flex items-center gap-2 rounded-lg border border-[var(--color-border)] bg-[var(--color-surface-muted)] px-5 py-2.5 text-sm font-medium text-[var(--color-text-secondary)] hover:border-[var(--color-primary)] hover:text-[var(--color-primary)] transition-all duration-200"
+          >
+            {t("hero.contacta")}
+          </a>
+        </div>
+
+        <!-- Social links -->
+        <div class="flex items-center gap-5">
+          {socialLinks.map((link) => (
+            <a
+              href={link.url}
+              class="text-sm font-medium text-[var(--color-text-tertiary)] hover:text-[var(--color-primary)] transition-colors"
+            >
+              {link.label}
+            </a>
+          ))}
+        </div>
+
+        <!-- Tech badges -->
+        <div class="flex flex-wrap gap-2">
+          {techBadges.map((tech) => (
+            <span class="badge-tech rounded-full border border-[var(--color-border)] bg-[var(--color-surface-muted)] px-3 py-1 text-xs font-medium text-[var(--color-text-secondary)]">
+              {tech}
+            </span>
+          ))}
+        </div>
+      </div>
+
+      <!-- Right column: terminal card -->
+      <div class="flex justify-center lg:justify-end animate-fade-up" style="--i:1; animation-delay: 150ms">
+        <TerminalCard t={t} />
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom gradient fade -->
+  <div class="pointer-events-none absolute inset-x-0 bottom-0 z-[1] h-32 bg-gradient-to-t from-[var(--color-bg)] to-transparent"></div>
+</section>

@@ -1,0 +1,298 @@
+@import "tailwindcss";
+
+@theme {
+  /* Semantic colour tokens — dark palette (default) */
+  --color-bg: #050A14;
+  --color-surface: #0F172A;
+  --color-surface-muted: #1E293B;
+  --color-text: #FFFFFF;
+  --color-text-secondary: #CBD5E1;
+  --color-text-tertiary: #94A3B8;
+  --color-primary: #3B82F6;
+  --color-primary-hover: #2563EB;
+  --color-border: rgba(148, 163, 184, 0.15);
+}
+
+/* Light palette takes over when data-theme="light" */
+[data-theme="light"] {
+  --color-bg: #F6F8FB;
+  --color-surface: #FFFFFF;
+  --color-surface-muted: #F1F5F9;
+  --color-text: #0F172A;
+  --color-text-secondary: #475569;
+  --color-text-tertiary: #64748B;
+  --color-primary: #2563EB;
+  --color-primary-hover: #1D4ED8;
+  --color-border: #E2E8F0;
+}
+
+/* Respect system preference when no explicit theme is set */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --color-bg: #050A14;
+    --color-surface: #0F172A;
+    --color-surface-muted: #1E293B;
+    --color-text: #FFFFFF;
+    --color-text-secondary: #CBD5E1;
+    --color-text-tertiary: #94A3B8;
+    --color-primary: #3B82F6;
+    --color-primary-hover: #2563EB;
+    --color-border: rgba(148, 163, 184, 0.15);
+  }
+}
+
+/* ── Premium multi-layer background ── */
+
+body {
+  /* Capa 1 — color base solids */
+  background-color: var(--color-bg);
+}
+
+/* Capa 2 — grid técnico sutil */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image:
+    linear-gradient(to right, var(--color-border) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--color-border) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(ellipse 80% 80% at 50% 0%, black 20%, transparent 70%);
+  -webkit-mask-image: radial-gradient(ellipse 80% 80% at 50% 0%, black 20%, transparent 70%);
+}
+
+/* Capa 3 — auroras radiales */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    /* Superior izquierda */
+    radial-gradient(circle at 20% 20%, rgba(59, 130, 246, 0.15), transparent 45%),
+    /* Inferior derecha */
+    radial-gradient(circle at 80% 70%, rgba(37, 99, 235, 0.10), transparent 50%);
+}
+
+/* Auroras más suaves en light mode */
+[data-theme="light"] body::after {
+  background:
+    radial-gradient(circle at 20% 20%, rgba(59, 130, 246, 0.08), transparent 45%),
+    radial-gradient(circle at 80% 70%, rgba(99, 102, 241, 0.05), transparent 50%);
+}
+
+/* ── Hero premium background ── */
+
+/* Capa 4a — Grid técnico en el hero */
+.hero-premium::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse at center, black 0%, black 35%, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse at center, black 0%, black 35%, transparent 75%);
+  transition: background-image 300ms ease, opacity 300ms ease;
+}
+
+/* Light mode grid — líneas más suaves */
+[data-theme="light"] .hero-premium::before {
+  background-image:
+    linear-gradient(to right, rgba(15, 23, 42, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(15, 23, 42, 0.04) 1px, transparent 1px);
+}
+
+/* Capa 4b — Aurora + spotlight detrás del nombre */
+.hero-premium::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    /* Aurora superior izquierda */
+    radial-gradient(circle at 20% 20%, rgba(59, 130, 246, 0.14), transparent 40%),
+    /* Spotlight centrado detrás del nombre */
+    radial-gradient(circle at center, rgba(59, 130, 246, 0.18), transparent 45%);
+  transition: background 300ms ease, opacity 300ms ease;
+}
+
+/* Light mode: aurora + spotlight más sutiles */
+[data-theme="light"] .hero-premium::after {
+  background:
+    radial-gradient(circle at 20% 20%, rgba(59, 130, 246, 0.07), transparent 40%),
+    radial-gradient(circle at center, rgba(37, 99, 235, 0.10), transparent 45%);
+}
+
+/* ── Layout utilities ── */
+
+.site-shell {
+  max-width: 1280px;
+  margin-inline: auto;
+  padding-inline: 1.5rem;
+}
+
+@media (min-width: 640px) {
+  .site-shell {
+    padding-inline: 2rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .site-shell {
+    padding-inline: 2.5rem;
+  }
+}
+
+/* ── Light mode premium cards ── */
+
+[data-theme="light"] .card-premium {
+  background: var(--color-surface);
+  border-color: var(--color-border);
+  box-shadow:
+    0 1px 2px rgba(15, 23, 42, 0.04),
+    0 8px 30px rgba(15, 23, 42, 0.06);
+}
+
+/* ── Light mode navbar ── */
+
+[data-theme="light"] .navbar-glass {
+  background: rgba(255, 255, 255, 0.75);
+  border-bottom-color: var(--color-border);
+}
+
+/* ── Light mode tech badges ── */
+
+[data-theme="light"] .badge-tech {
+  background: #EFF6FF;
+  border-color: #BFDBFE;
+  color: #1E3A8A;
+}
+
+[data-theme="light"] .badge-tech:hover {
+  background: #DBEAFE;
+}
+
+/* ── Light mode form inputs ── */
+
+[data-theme="light"] input,
+[data-theme="light"] textarea {
+  background: var(--color-surface);
+  border-color: #CBD5E1;
+  color: var(--color-text);
+}
+
+[data-theme="light"] input::placeholder,
+[data-theme="light"] textarea::placeholder {
+  color: var(--color-text-tertiary);
+}
+
+[data-theme="light"] input:focus,
+[data-theme="light"] textarea:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+/* ── Focus ring (visible on :focus-visible only) ── */
+
+:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ── Skip link ── */
+
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 1rem;
+  z-index: 100;
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #fff;
+  background: var(--color-primary);
+  border-radius: 0.375rem;
+  transition: top 200ms ease;
+}
+
+.skip-link:focus {
+  top: 0.5rem;
+}
+
+/* ── Anti-FOUC: block rendering until theme is applied ── */
+
+html.scripting-enabled {
+  visibility: hidden;
+}
+
+html.theme-ready {
+  visibility: visible;
+}
+
+/* ── Smooth scroll with header offset ── */
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 88px; /* 72px navbar + 16px breathing room */
+}
+
+/* ── Animations ── */
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-up {
+  animation: fadeUp 300ms ease-out both;
+}
+
+/* ── Hover interactions ── */
+
+.hover-lift {
+  transition: transform 200ms ease, box-shadow 200ms ease, border-color 200ms ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-6px);
+}
+
+.hover-glow:hover {
+  box-shadow: 0 0 30px rgba(59, 130, 246, 0.15);
+}
+
+[data-theme="light"] .hover-glow:hover {
+  box-shadow: 0 0 30px rgba(37, 99, 235, 0.10);
+}
+
+/* ── Reduced motion ── */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+}

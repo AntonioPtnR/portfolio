@@ -1,0 +1,71 @@
+---
+import { getCollection } from "astro:content";
+import MainLayout from "~/layouts/MainLayout.astro";
+import Hero from "~/components/sections/Hero.astro";
+import About from "~/components/sections/About.astro";
+import Timeline from "~/components/sections/Timeline.astro";
+import Projects from "~/components/sections/Projects.astro";
+import Contact from "~/components/sections/Contact.astro";
+import { useTranslations } from "~/i18n/utils";
+import { languages } from "~/i18n/ui";
+
+export function getStaticPaths() {
+  return Object.keys(languages).map((lang) => ({ params: { lang } }));
+}
+
+const { lang } = Astro.params;
+
+const t = useTranslations(lang as keyof typeof import("~/i18n/ui").ui) as unknown as (key: string) => string;
+
+const allEducation = await getCollection("education");
+const allExperience = await getCollection("experience");
+const allProjects = await getCollection("projects");
+
+const educationEntries = allEducation.filter((e) => e.data.lang === lang);
+const experienceEntries = allExperience.filter((e) => e.data.lang === lang);
+const projectEntries = allProjects.filter((p) => p.data.lang === lang);
+
+const educationItems = educationEntries
+  .sort((a, b) => b.data.order - a.data.order)
+  .map((e) => ({
+    title: e.data.title,
+    subtitle: e.data.institution,
+    period: e.data.period,
+    description: e.data.description,
+    tags: e.data.tags,
+  }));
+
+const experienceItems = experienceEntries
+  .sort((a, b) => b.data.order - a.data.order)
+  .map((e) => ({
+    title: e.data.role,
+    subtitle: e.data.company,
+    period: e.data.period,
+    description: e.data.description,
+    highlights: e.data.highlights,
+    tags: e.data.tech,
+  }));
+
+const projectItems = projectEntries
+  .sort((a, b) => b.data.order - a.data.order)
+  .map((p) => ({
+    title: p.data.title,
+    description: p.data.description,
+    tech: p.data.tech,
+    category: p.data.category,
+    image: p.data.image,
+    imageAlt: p.data.imageAlt,
+    demoUrl: p.data.demoUrl,
+    repoUrl: p.data.repoUrl,
+    featured: p.data.featured,
+  }));
+---
+
+<MainLayout lang={lang} t={t}>
+  <Hero t={t} />
+  <About t={t} />
+  <Timeline id="formacion" title={t("education.titulo")} icon="📚" items={educationItems} />
+  <Timeline id="experiencia" title={t("experience.titulo")} icon="💼" items={experienceItems} />
+  <Projects projects={projectItems} t={t} />
+  <Contact lang={lang} t={t} />
+</MainLayout>

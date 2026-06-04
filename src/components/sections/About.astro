@@ -1,0 +1,63 @@
+---
+interface Props {
+  t: (key: string) => string;
+}
+
+const { t } = Astro.props;
+---
+
+<section id="sobre-mi" class="bg-[var(--color-surface)]">
+  <div class="site-shell py-20 sm:py-28">
+    <div class="grid items-start gap-12 lg:grid-cols-5">
+      <!-- Left: avatar + headline -->
+      <div class="flex flex-col items-center gap-5 lg:col-span-2 lg:items-start animate-fade-up" style="--i:0">
+        <!-- Avatar frame -->
+        <div class="relative">
+          <div class="h-28 w-28 overflow-hidden rounded-full border-2 border-[var(--color-primary)] p-0.5">
+            <div class="flex h-full w-full items-center justify-center rounded-full bg-[var(--color-surface-muted)] text-4xl font-bold text-[var(--color-primary)]">
+              A
+            </div>
+          </div>
+          <!-- Green online dot -->
+          <span class="absolute bottom-1 right-1 h-4 w-4 rounded-full border-2 border-[var(--color-surface)] bg-emerald-500"></span>
+        </div>
+
+        <div class="text-center lg:text-left">
+          <p class="text-sm font-semibold tracking-[0.2em] text-[var(--color-primary)] uppercase mb-2">
+            {t("about.titulo")}
+          </p>
+          <h2 class="text-2xl font-bold tracking-tight sm:text-3xl">
+            {t("about.subtitulo")}
+          </h2>
+        </div>
+      </div>
+
+      <!-- Right: description + metrics -->
+      <div class="lg:col-span-3 animate-fade-up" style="--i:1; animation-delay: 100ms">
+        <p class="text-base text-[var(--color-text-secondary)] leading-relaxed">
+          {t("about.bio")}
+        </p>
+
+        <!-- Metric cards -->
+        <div class="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-4">
+          <div class="card-premium rounded-xl border border-[var(--color-border)] bg-[var(--color-bg)] p-4 text-center">
+            <p class="text-2xl font-bold text-[var(--color-primary)] sm:text-3xl">4+</p>
+            <p class="mt-1 text-xs font-medium text-[var(--color-text-tertiary)]">{t("about.metrica-anios")}</p>
+          </div>
+          <div class="card-premium rounded-xl border border-[var(--color-border)] bg-[var(--color-bg)] p-4 text-center">
+            <p class="text-2xl font-bold text-[var(--color-primary)] sm:text-3xl">3+</p>
+            <p class="mt-1 text-xs font-medium text-[var(--color-text-tertiary)]">{t("about.metrica-proyectos")}</p>
+          </div>
+          <div class="card-premium rounded-xl border border-[var(--color-border)] bg-[var(--color-bg)] p-4 text-center">
+            <p class="text-2xl font-bold text-[var(--color-primary)] sm:text-3xl">15+</p>
+            <p class="mt-1 text-xs font-medium text-[var(--color-text-tertiary)]">{t("about.metrica-tecnologias")}</p>
+          </div>
+          <div class="card-premium rounded-xl border border-[var(--color-border)] bg-[var(--color-bg)] p-4 text-center">
+            <p class="text-2xl font-bold text-[var(--color-primary)] sm:text-3xl">100%</p>
+            <p class="mt-1 text-xs font-medium text-[var(--color-text-tertiary)]">{t("about.metrica-compromiso")}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
