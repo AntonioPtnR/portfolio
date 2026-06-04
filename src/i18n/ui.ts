@@ -6,6 +6,13 @@ export const languages = {
 
 export const defaultLang = 'es';
 
+/** Open Graph / HTML lang locale codes */
+export const ogLocales: Record<keyof typeof languages, string> = {
+  es: 'es_ES',
+  en: 'en',
+  ca: 'ca_ES',
+};
+
 export const ui = {
   es: {
     // Navbar
@@ -82,8 +89,8 @@ export const ui = {
     'lang.en': 'EN',
     'lang.ca': 'CA',
     // SEO
-    'seo.titulo': 'Antonio — Software Engineer',
-    'seo.descripcion': 'Antonio Patón Rico — Software Engineer. Backend, Frontend y Cloud. Aplicaciones escalables y experiencias de calidad.',
+    'seo.titulo': 'Antonio Patón Rico — Software Engineer | Backend, Frontend & Cloud',
+    'seo.descripcion': 'Antonio Patón Rico — Ingeniero de Software especializado en React, Next.js, TypeScript y Laravel. Desarrollo de aplicaciones web modernas, arquitecturas limpias e IA aplicada con agentes y LLMs.',
     // Nav filter label
     'portfolio.filtrar': 'Filtrar proyectos por categoría',
   },
@@ -148,8 +155,8 @@ export const ui = {
     'lang.es': 'ES',
     'lang.en': 'EN',
     'lang.ca': 'CA',
-    'seo.titulo': 'Antonio — Software Engineer',
-    'seo.descripcion': 'Antonio Patón Rico — Software Engineer. Backend, Frontend & Cloud. Scalable applications and quality experiences.',
+    'seo.titulo': 'Antonio Patón Rico — Software Engineer | Backend, Frontend & Cloud',
+    'seo.descripcion': 'Antonio Patón Rico — Software Engineer specialized in React, Next.js, TypeScript and Laravel. Modern web apps, clean architectures, and applied AI with agents and LLMs.',
     'portfolio.filtrar': 'Filter projects by category',
   },
   ca: {
@@ -213,8 +220,8 @@ export const ui = {
     'lang.es': 'ES',
     'lang.en': 'EN',
     'lang.ca': 'CA',
-    'seo.titulo': 'Antonio — Enginyer de Software',
-    'seo.descripcion': 'Antonio Patón Rico — Enginyer de Software. Backend, Frontend i Cloud. Aplicacions escalables i experiències de qualitat.',
+    'seo.titulo': 'Antonio Patón Rico — Enginyer de Software | Backend, Frontend & Cloud',
+    'seo.descripcion': 'Antonio Patón Rico — Enginyer de Software especialitzat en React, Next.js, TypeScript i Laravel. Aplicacions web modernes, arquitectures netes i IA aplicada amb agents i LLMs.',
     'portfolio.filtrar': 'Filtrar projectes per categoria',
   },
 } as const;
