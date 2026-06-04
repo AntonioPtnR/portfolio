@@ -4,11 +4,6 @@ import Header from "~/components/layout/Header.astro";
 import Footer from "~/components/layout/Footer.astro";
 import { languages, defaultLang, ogLocales } from "~/i18n/ui";
 
-interface Props {
-  lang: string;
-  t: (key: string) => string;
-}
-
 const { lang, t } = Astro.props;
 
 // Site base URL (falls back to hardcoded if Astro.site unavailable)
@@ -108,7 +103,7 @@ const jsonLd = {
     <meta name="twitter:description" content={t("seo.descripcion")} />
 
     <!-- JSON-LD Structured Data -->
-    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)}></script>
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)}></script>
 
     <!-- Anti-FOUC: apply theme before first paint -->
     <script is:inline>
