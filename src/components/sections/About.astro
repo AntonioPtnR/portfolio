@@ -14,9 +14,13 @@ const { t } = Astro.props;
         <!-- Avatar frame -->
         <div class="relative">
           <div class="h-28 w-28 overflow-hidden rounded-full border-2 border-[var(--color-primary)] p-0.5">
-            <div class="flex h-full w-full items-center justify-center rounded-full bg-[var(--color-surface-muted)] text-4xl font-bold text-[var(--color-primary)]">
-              A
-            </div>
+            <img
+              src="/avatar.jpg"
+              alt="Antonio Patón Rico"
+              class="h-full w-full rounded-full object-cover"
+              loading="lazy"
+              decoding="async"
+            />
           </div>
           <!-- Green online dot -->
           <span class="absolute bottom-1 right-1 h-4 w-4 rounded-full border-2 border-[var(--color-surface)] bg-emerald-500"></span>

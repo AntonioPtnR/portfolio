@@ -40,6 +40,9 @@ npm run build      # astro check + astro build → dist/
 npm run preview    # Preview built output
 ```
 
+## AI workflow
+- Before any `git push` in this repo, run `npm run build` successfully first. This applies to branch pushes and direct pushes to `main`.
+
 ## Architecture decisions
 
 ### Tailwind 4 via Vite plugin
