@@ -5,6 +5,8 @@ import Footer from "~/components/layout/Footer.astro";
 import { languages, defaultLang, ogLocales } from "~/i18n/ui";
 
 const { lang, t } = Astro.props;
+const siteName = "Antonio Patón Rico";
+const siteShortName = "Antonio Patón";
 
 // Site base URL (falls back to hardcoded if Astro.site unavailable)
 const site = Astro.site ?? new URL("https://antoniopr.pages.dev");
@@ -43,7 +45,7 @@ const jsonLd = {
   "@graph": [
     {
       "@type": "Person",
-      name: "Antonio Patón Rico",
+      name: siteName,
       jobTitle: t("about.subtitulo"),
       url: site.href,
       sameAs: [
@@ -54,7 +56,8 @@ const jsonLd = {
     {
       "@type": "WebSite",
       url: site.href,
-      name: t("seo.titulo"),
+      name: siteName,
+      alternateName: siteShortName,
       description: t("seo.descripcion"),
       inLanguage: lang,
     },
@@ -69,8 +72,12 @@ const jsonLd = {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={t("seo.descripcion")} />
     <meta name="robots" content="index, follow" />
+    <meta name="application-name" content={siteName} />
+    <meta name="apple-mobile-web-app-title" content={siteShortName} />
+    <meta name="theme-color" content="#2563eb" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="icon" type="image/jpeg" sizes="32x32" href="/avatar.jpg" />
+    <link rel="icon" type="image/jpeg" href="/avatar.jpg" />
+    <link rel="apple-touch-icon" href="/avatar.jpg" />
     <link rel="canonical" href={canonical} />
     <title>{t("seo.titulo")}</title>
 
@@ -89,7 +96,7 @@ const jsonLd = {
     {ogLocaleAlternates.map((loc) => (
       <meta property="og:locale:alternate" content={loc} />
     ))}
-    <meta property="og:site_name" content="Antonio Patón Rico — Portfolio" />
+    <meta property="og:site_name" content={siteName} />
     <meta property="og:image" content={ogImage} />
     <meta property="og:image:width" content="1254" />
     <meta property="og:image:height" content="1254" />

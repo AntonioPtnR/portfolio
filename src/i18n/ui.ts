@@ -89,8 +89,8 @@ export const ui = {
     'lang.en': 'EN',
     'lang.ca': 'CA',
     // SEO
-    'seo.titulo': 'Antonio Patón Rico — Software Engineer | Backend, Frontend & Cloud',
-    'seo.descripcion': 'Antonio Patón Rico — Ingeniero de Software especializado en React, Next.js, TypeScript y Laravel. Desarrollo de aplicaciones web modernas, arquitecturas limpias e IA aplicada con agentes y LLMs.',
+    'seo.titulo': 'Antonio Patón Rico | Software Engineer',
+    'seo.descripcion': 'Ingeniero de Software especializado en backend, frontend e IA aplicada. React, Next.js, TypeScript y Laravel para construir productos web modernos y mantenibles.',
     // Nav filter label
     'portfolio.filtrar': 'Filtrar proyectos por categoría',
   },
@@ -155,8 +155,8 @@ export const ui = {
     'lang.es': 'ES',
     'lang.en': 'EN',
     'lang.ca': 'CA',
-    'seo.titulo': 'Antonio Patón Rico — Software Engineer | Backend, Frontend & Cloud',
-    'seo.descripcion': 'Antonio Patón Rico — Software Engineer specialized in React, Next.js, TypeScript and Laravel. Modern web apps, clean architectures, and applied AI with agents and LLMs.',
+    'seo.titulo': 'Antonio Patón Rico | Software Engineer',
+    'seo.descripcion': 'Software Engineer focused on backend, frontend and applied AI. React, Next.js, TypeScript and Laravel for modern, maintainable web products.',
     'portfolio.filtrar': 'Filter projects by category',
   },
   ca: {
@@ -220,8 +220,8 @@ export const ui = {
     'lang.es': 'ES',
     'lang.en': 'EN',
     'lang.ca': 'CA',
-    'seo.titulo': 'Antonio Patón Rico — Enginyer de Software | Backend, Frontend & Cloud',
-    'seo.descripcion': 'Antonio Patón Rico — Enginyer de Software especialitzat en React, Next.js, TypeScript i Laravel. Aplicacions web modernes, arquitectures netes i IA aplicada amb agents i LLMs.',
+    'seo.titulo': 'Antonio Patón Rico | Enginyer de Software',
+    'seo.descripcion': 'Enginyer de Software especialitzat en backend, frontend i IA aplicada. React, Next.js, TypeScript i Laravel per construir productes web moderns i mantenibles.',
     'portfolio.filtrar': 'Filtrar projectes per categoria',
   },
 } as const;

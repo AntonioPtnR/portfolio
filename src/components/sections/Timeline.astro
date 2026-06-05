@@ -95,12 +95,13 @@ const altClass = isAlternating ? "alternating" : "";
     position: absolute;
     top: 0;
     bottom: 0;
-    width: 2px;
+    left: 0.9375rem;
+    width: 0.125rem;
     background: var(--color-border);
   }
 
   .timeline-container:not(.alternating)::before {
-    left: 15px;
+    left: 0.9375rem;
   }
 
   @media (min-width: 768px) {
@@ -128,17 +129,19 @@ const altClass = isAlternating ? "alternating" : "";
   .timeline-dot {
     position: absolute;
     top: 0.375rem;
-    height: 12px;
-    width: 12px;
+    left: 0.5625rem;
+    box-sizing: border-box;
+    height: 0.75rem;
+    width: 0.75rem;
     border-radius: 50%;
     background: var(--color-primary);
-    border: 3px solid var(--color-surface);
+    border: 0.1875rem solid var(--color-surface);
     z-index: 1;
     box-shadow: 0 0 8px rgba(59, 130, 246, 0.4);
   }
 
   .timeline-dot:not(.alternating) {
-    left: 10px;
+    left: 0.5625rem;
   }
 
   @media (min-width: 768px) {
@@ -148,7 +151,7 @@ const altClass = isAlternating ? "alternating" : "";
     }
 
     .timeline-dot:not(.alternating) {
-      left: 15px;
+      left: 13px;
     }
   }
 
@@ -158,6 +161,7 @@ const altClass = isAlternating ? "alternating" : "";
     border-radius: 0.75rem;
     background: var(--color-bg);
     padding: 1.25rem;
+    margin-left: 2.5rem;
     transition: border-color 200ms ease, box-shadow 200ms ease;
   }
 
@@ -176,12 +180,8 @@ const altClass = isAlternating ? "alternating" : "";
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
   }
 
-  .timeline-card:not(.alternating) {
-    margin-left: 2.25rem;
-  }
-
   @media (min-width: 640px) {
-    .timeline-card:not(.alternating) {
+    .timeline-card {
       margin-left: 2.75rem;
     }
   }
@@ -189,6 +189,7 @@ const altClass = isAlternating ? "alternating" : "";
   @media (min-width: 768px) {
     .timeline-card.alternating {
       width: calc(50% - 2rem);
+      margin-left: 0;
     }
 
     /* Odd entries: left side */
@@ -201,6 +202,10 @@ const altClass = isAlternating ? "alternating" : "";
     .timeline-entry.alternating:nth-child(even) .timeline-card {
       margin-left: auto;
       margin-right: 0;
+    }
+
+    .timeline-card:not(.alternating) {
+      margin-left: 2.75rem;
     }
   }
 </style>
