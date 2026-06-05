@@ -1,0 +1,401 @@
+---
+import { languages } from "~/i18n/ui";
+
+export function getStaticPaths() {
+  return Object.keys(languages).map((lang) => ({ params: { lang } }));
+}
+
+const { lang = "es" } = Astro.params;
+
+const cvContent = {
+  es: {
+    htmlLang: "es",
+    pageTitle: "Antonio Patón Rico — CV",
+    title: "Software Engineer",
+    backLabel: "Volver al portfolio",
+    downloadLabel: "Descargar CV en PDF",
+    sections: {
+      profile: "Perfil",
+      experience: "Experiencia",
+      education: "Formación",
+      skills: "Habilidades Técnicas",
+      softSkills: "Competencias",
+      languages: "Idiomas",
+      projects: "Proyectos Personales",
+    },
+    profile:
+      "Ingeniero de Software con 4 años de experiencia en desarrollo full-stack. Especializado en el ecosistema TypeScript (React, Next.js) y backend con PHP y Laravel. En los últimos años he ampliado mi foco hacia la inteligencia artificial aplicada, investigando sistemas multiagente, LLMs y harnesses de evaluación. Actualmente compagino mi trabajo en Globalsuite Solutions con el desarrollo de tres proyectos personales. Aprendizaje autodidacta continuo, orientado a la arquitectura limpia y la calidad del código.",
+    skillGroups: [
+      { title: "Frontend", value: "React, Next.js, TypeScript, Tailwind CSS, Astro, HTML5, CSS3" },
+      { title: "Backend", value: "PHP, Laravel, REST APIs, Node.js" },
+      { title: "Bases de datos", value: "SQL, PostgreSQL, MongoDB" },
+      { title: "DevOps", value: "Docker, Jenkins, Git, CI/CD, Linux" },
+      { title: "IA", value: "Sistemas multiagente, LLMs, RAG, harnesses de evaluación" },
+    ],
+    softSkills: [
+      "Aprendizaje autodidacta",
+      "Comunicación técnica",
+      "Resolución de problemas",
+      "Adaptabilidad",
+      "Trabajo en equipo",
+      "Organización",
+      "Pensamiento analítico",
+    ],
+    languagesList: [
+      ["Español", "Nativo"],
+      ["Inglés", "B1 (Cambridge)"],
+    ],
+    experience: [
+      {
+        role: "Software Engineer",
+        date: "08/2025 — Presente",
+        company: "Globalsuite Solutions",
+        bullets: [
+          "Desarrollo full-stack con React, Next.js y TypeScript en el frontend",
+          "Mantenimiento y evolución del backend con PHP y Laravel en producción",
+          "Diseño e implementación de un orquestador interno para acelerar el flujo de trabajo del equipo",
+          "Trabajo con bases de datos SQL y MongoDB, contenedores Docker y CI/CD con Jenkins",
+        ],
+      },
+      { role: "Software Development Specialist", date: "02/2024 — 08/2025", company: "Globalsuite Solutions" },
+      { role: "Software Development Junior", date: "02/2023 — 02/2024", company: "Globalsuite Solutions" },
+      { role: "Software Development Trainee", date: "02/2022 — 02/2023", company: "Globalsuite Solutions" },
+    ],
+    education: {
+      title: "Grado en Ingeniería Informática",
+      date: "2018 — 2022",
+      company: "Universidad de Castilla-La Mancha",
+      description:
+        "Especialización en Tecnologías de la Información. Algoritmia, estructuras de datos, bases de datos, redes, sistemas operativos y metodologías ágiles.",
+    },
+    projects: [
+      {
+        title: "Nexfit",
+        date: "En desarrollo",
+        description:
+          "SaaS integral para entrenadores personales y nutricionistas. NestJS, Next.js 16, Prisma, PostgreSQL, Expo. App móvil offline-first para clientes.",
+      },
+      {
+        title: "Agro-pathON",
+        date: "En fase de diseño",
+        description:
+          "Automatización del cuaderno de campo digital para agricultores. TypeScript, Next.js, PostgreSQL, Drizzle ORM.",
+      },
+    ],
+  },
+  en: {
+    htmlLang: "en",
+    pageTitle: "Antonio Patón Rico — Resume",
+    title: "Software Engineer",
+    backLabel: "Back to portfolio",
+    downloadLabel: "Download resume as PDF",
+    sections: {
+      profile: "Profile",
+      experience: "Experience",
+      education: "Education",
+      skills: "Technical Skills",
+      softSkills: "Core Skills",
+      languages: "Languages",
+      projects: "Personal Projects",
+    },
+    profile:
+      "Software Engineer with 4 years of full-stack development experience. Specialized in the TypeScript ecosystem (React, Next.js) and backend development with PHP and Laravel. In recent years I have expanded my focus toward applied artificial intelligence, researching multi-agent systems, LLMs and evaluation harnesses. I currently combine my role at Globalsuite Solutions with the development of three personal projects. Continuous self-taught learning, focused on clean architecture and code quality.",
+    skillGroups: [
+      { title: "Frontend", value: "React, Next.js, TypeScript, Tailwind CSS, Astro, HTML5, CSS3" },
+      { title: "Backend", value: "PHP, Laravel, REST APIs, Node.js" },
+      { title: "Databases", value: "SQL, PostgreSQL, MongoDB" },
+      { title: "DevOps", value: "Docker, Jenkins, Git, CI/CD, Linux" },
+      { title: "AI", value: "Multi-agent systems, LLMs, RAG, evaluation harnesses" },
+    ],
+    softSkills: [
+      "Self-directed learning",
+      "Technical communication",
+      "Problem solving",
+      "Adaptability",
+      "Teamwork",
+      "Organization",
+      "Analytical thinking",
+    ],
+    languagesList: [
+      ["Spanish", "Native"],
+      ["English", "B1 (Cambridge)"],
+    ],
+    experience: [
+      {
+        role: "Software Engineer",
+        date: "08/2025 — Present",
+        company: "Globalsuite Solutions",
+        bullets: [
+          "Full-stack development with React, Next.js and TypeScript on the frontend",
+          "Maintenance and evolution of the backend with PHP and Laravel in production",
+          "Design and implementation of an internal orchestrator to speed up team workflows",
+          "Work with SQL and MongoDB databases, Docker containers, and CI/CD with Jenkins",
+        ],
+      },
+      { role: "Software Development Specialist", date: "02/2024 — 08/2025", company: "Globalsuite Solutions" },
+      { role: "Software Development Junior", date: "02/2023 — 02/2024", company: "Globalsuite Solutions" },
+      { role: "Software Development Trainee", date: "02/2022 — 02/2023", company: "Globalsuite Solutions" },
+    ],
+    education: {
+      title: "Bachelor's Degree in Computer Engineering",
+      date: "2018 — 2022",
+      company: "University of Castilla-La Mancha",
+      description:
+        "Specialization in Information Technologies. Algorithms, data structures, databases, networks, operating systems, and agile methodologies.",
+    },
+    projects: [
+      {
+        title: "Nexfit",
+        date: "In development",
+        description:
+          "End-to-end SaaS for personal trainers and nutritionists. NestJS, Next.js 16, Prisma, PostgreSQL, Expo. Offline-first mobile app for clients.",
+      },
+      {
+        title: "Agro-pathON",
+        date: "Design phase",
+        description:
+          "Automation of the digital field notebook for farmers. TypeScript, Next.js, PostgreSQL, Drizzle ORM.",
+      },
+    ],
+  },
+  ca: {
+    htmlLang: "ca",
+    pageTitle: "Antonio Patón Rico — CV",
+    title: "Software Engineer",
+    backLabel: "Tornar al portfolio",
+    downloadLabel: "Descarregar CV en PDF",
+    sections: {
+      profile: "Perfil",
+      experience: "Experiència",
+      education: "Formació",
+      skills: "Habilitats Tècniques",
+      softSkills: "Competències",
+      languages: "Idiomes",
+      projects: "Projectes Personals",
+    },
+    profile:
+      "Enginyer de Software amb 4 anys d'experiència en desenvolupament full-stack. Especialitzat en l'ecosistema TypeScript (React, Next.js) i backend amb PHP i Laravel. En els últims anys he ampliat el meu focus cap a la intel·ligència artificial aplicada, investigant sistemes multiagent, LLMs i harnesses d'avaluació. Actualment compagine la meua faena a Globalsuite Solutions amb el desenvolupament de tres projectes personals. Aprenentatge autodidacta continu, orientat a l'arquitectura neta i la qualitat del codi.",
+    skillGroups: [
+      { title: "Frontend", value: "React, Next.js, TypeScript, Tailwind CSS, Astro, HTML5, CSS3" },
+      { title: "Backend", value: "PHP, Laravel, REST APIs, Node.js" },
+      { title: "Bases de dades", value: "SQL, PostgreSQL, MongoDB" },
+      { title: "DevOps", value: "Docker, Jenkins, Git, CI/CD, Linux" },
+      { title: "IA", value: "Sistemes multiagent, LLMs, RAG, harnesses d'avaluació" },
+    ],
+    softSkills: [
+      "Aprenentatge autodidacta",
+      "Comunicació tècnica",
+      "Resolució de problemes",
+      "Adaptabilitat",
+      "Treball en equip",
+      "Organització",
+      "Pensament analític",
+    ],
+    languagesList: [
+      ["Espanyol", "Nadiu"],
+      ["Anglés", "B1 (Cambridge)"],
+    ],
+    experience: [
+      {
+        role: "Software Engineer",
+        date: "08/2025 — Actualitat",
+        company: "Globalsuite Solutions",
+        bullets: [
+          "Desenvolupament full-stack amb React, Next.js i TypeScript en el frontend",
+          "Manteniment i evolució del backend amb PHP i Laravel en producció",
+          "Disseny i implementació d'un orquestrador intern per a accelerar el flux de treball de l'equip",
+          "Treball amb bases de dades SQL i MongoDB, contenidors Docker i CI/CD amb Jenkins",
+        ],
+      },
+      { role: "Software Development Specialist", date: "02/2024 — 08/2025", company: "Globalsuite Solutions" },
+      { role: "Software Development Junior", date: "02/2023 — 02/2024", company: "Globalsuite Solutions" },
+      { role: "Software Development Trainee", date: "02/2022 — 02/2023", company: "Globalsuite Solutions" },
+    ],
+    education: {
+      title: "Grau en Enginyeria Informàtica",
+      date: "2018 — 2022",
+      company: "Universidad de Castilla-La Mancha",
+      description:
+        "Especialització en Tecnologies de la Informació. Algorísmia, estructures de dades, bases de dades, xarxes, sistemes operatius i metodologies àgils.",
+    },
+    projects: [
+      {
+        title: "Nexfit",
+        date: "En desenvolupament",
+        description:
+          "SaaS integral per a entrenadors personals i nutricionistes. NestJS, Next.js 16, Prisma, PostgreSQL, Expo. App mòbil offline-first per a clients.",
+      },
+      {
+        title: "Agro-pathON",
+        date: "En fase de disseny",
+        description:
+          "Automatització del quadern de camp digital per a agricultors. TypeScript, Next.js, PostgreSQL, Drizzle ORM.",
+      },
+    ],
+  },
+} as const;
+
+const content = cvContent[lang as keyof typeof cvContent] ?? cvContent.es;
+const backHref = `/${lang}/`;
+const experience = content.experience as ReadonlyArray<{
+  role: string;
+  date: string;
+  company: string;
+  bullets?: readonly string[];
+}>;
+---
+
+<!doctype html>
+<html lang={content.htmlLang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{content.pageTitle}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <style is:inline>
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+      html { -webkit-font-smoothing: antialiased; }
+      body { font-family: 'Inter', system-ui, sans-serif; background: #f8fafc; color: #0f172a; line-height: 1.6; font-size: 11pt; }
+      .cv-actions { display: flex; justify-content: center; gap: 1rem; max-width: 800px; margin: 1.5rem auto 2rem; padding: 0 2rem; }
+      .cv-action-button { appearance: none; position: relative; isolation: isolate; border: 1px solid #cbd5e1; border-radius: 9999px; background: #ffffff; color: #0f172a; display: inline-flex; align-items: center; justify-content: center; width: 3.25rem; height: 3.25rem; cursor: pointer; text-decoration: none; box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08); transform: translateY(8px); opacity: 0; animation: cvActionFadeUp 420ms ease-out forwards; transition: transform 180ms ease, box-shadow 180ms ease, opacity 180ms ease, background-color 180ms ease, border-color 180ms ease; }
+      .cv-action-button::after { content: ""; position: absolute; inset: -0.2rem; border-radius: inherit; opacity: 0; z-index: -1; pointer-events: none; transition: opacity 180ms ease; }
+      .cv-action-button--primary { background: #2563eb; border-color: #2563eb; color: #fff; }
+      .cv-action-button--primary::after { background: radial-gradient(circle, rgba(37, 99, 235, 0.28) 0%, rgba(37, 99, 235, 0) 70%); }
+      .cv-action-button:hover { opacity: 0.98; transform: translateY(-2px); box-shadow: 0 12px 28px rgba(15, 23, 42, 0.14); }
+      .cv-action-button:active { transform: scale(0.97); }
+      .cv-action-button:nth-child(2) { animation-delay: 80ms; }
+      .cv-action-button--primary:hover { transform: translateY(-3px) scale(1.08); box-shadow: 0 16px 34px rgba(37, 99, 235, 0.3); }
+      .cv-action-button--primary:hover svg { transform: scale(1.08); }
+      .cv-action-button--primary:hover::after, .cv-action-button--primary:focus-visible::after { opacity: 1; }
+      .cv-action-button svg { width: 1.25rem; height: 1.25rem; transition: transform 180ms ease; }
+      @keyframes cvActionFadeUp { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+      .cv-page { max-width: 800px; margin: 0 auto; padding: 3rem 2rem 4rem; background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,0.06); min-height: 100vh; }
+      .cv-header { text-align: center; margin-bottom: 2rem; padding-bottom: 1.5rem; border-bottom: 2px solid #2563eb; }
+      .cv-name { font-size: 22pt; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 0.15rem; }
+      .cv-title { font-size: 12pt; color: #2563eb; font-weight: 600; margin-bottom: 0.75rem; }
+      .cv-contact { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.4rem 1.2rem; font-size: 9pt; color: #475569; }
+      .cv-section { margin-bottom: 1.6rem; }
+      .cv-section h2 { font-size: 10.5pt; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #2563eb; border-bottom: 1px solid #e2e8f0; padding-bottom: 0.3rem; margin-bottom: 0.65rem; }
+      .cv-section h3 { font-size: 10.5pt; font-weight: 700; }
+      .cv-section h4 { font-size: 9.5pt; font-weight: 700; margin-bottom: 0.1rem; }
+      .cv-entry { margin-bottom: 0.85rem; }
+      .cv-entry:last-child { margin-bottom: 0; }
+      .cv-entry-header { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; }
+      .cv-date { font-size: 8.5pt; color: #64748b; font-weight: 500; }
+      .cv-company { font-size: 9.5pt; color: #475569; margin-bottom: 0.25rem; }
+      .cv-section ul { margin: 0.15rem 0 0 1.2rem; font-size: 9.5pt; }
+      .cv-section li { margin-bottom: 0.15rem; color: #475569; }
+      .cv-skills { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 0.6rem; }
+      .cv-skills p { font-size: 9pt; color: #475569; }
+      .cv-softskills { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+      .cv-softskills span { background: #f1f5f9; border: 1px solid #e2e8f0; border-radius: 100px; padding: 0.25rem 0.75rem; font-size: 8.5pt; color: #475569; }
+      .cv-languages { display: flex; flex-wrap: wrap; gap: 1.5rem; font-size: 9.5pt; }
+      @media print { html, body { background: #fff !important; } .cv-actions { display: none !important; } .cv-page { box-shadow: none; padding: 0; max-width: 100%; min-height: 0; } @page { margin: 1.4cm 1.6cm; size: A4; } }
+      @media (prefers-reduced-motion: reduce) { .cv-action-button, .cv-action-button--primary { animation: none; opacity: 1; transform: none; transition: none; } }
+      @media (max-width: 640px) { .cv-actions { padding: 0 1rem; } .cv-page { padding: 2rem 1rem 3rem; } }
+    </style>
+  </head>
+  <body>
+    <div class="cv-page">
+      <header class="cv-header">
+        <h1 class="cv-name">Antonio Patón Rico</h1>
+        <p class="cv-title">{content.title}</p>
+        <div class="cv-contact">
+          <span>antoniopr009@gmail.com</span>
+          <span>676 93 71 92</span>
+          <span>Ciudad Real, España</span>
+          <span>github.com/AntonioPtnR</span>
+          <span>linkedin.com/in/antoniopatonrico</span>
+        </div>
+      </header>
+
+      <section class="cv-section">
+        <h2>{content.sections.profile}</h2>
+        <p>{content.profile}</p>
+      </section>
+
+      <section class="cv-section">
+        <h2>{content.sections.experience}</h2>
+        {experience.map((entry) => (
+          <div class="cv-entry">
+            <div class="cv-entry-header">
+              <h3>{entry.role}</h3>
+              <span class="cv-date">{entry.date}</span>
+            </div>
+            <p class="cv-company">{entry.company}</p>
+            {entry.bullets && (
+              <ul>
+                {entry.bullets.map((bullet) => <li>{bullet}</li>)}
+              </ul>
+            )}
+          </div>
+        ))}
+      </section>
+
+      <section class="cv-section">
+        <h2>{content.sections.education}</h2>
+        <div class="cv-entry">
+          <div class="cv-entry-header">
+            <h3>{content.education.title}</h3>
+            <span class="cv-date">{content.education.date}</span>
+          </div>
+          <p class="cv-company">{content.education.company}</p>
+          <p>{content.education.description}</p>
+        </div>
+      </section>
+
+      <section class="cv-section">
+        <h2>{content.sections.skills}</h2>
+        <div class="cv-skills">
+          {content.skillGroups.map((group) => (
+            <div><h4>{group.title}</h4><p>{group.value}</p></div>
+          ))}
+        </div>
+      </section>
+
+      <section class="cv-section">
+        <h2>{content.sections.softSkills}</h2>
+        <div class="cv-softskills">
+          {content.softSkills.map((skill) => <span>{skill}</span>)}
+        </div>
+      </section>
+
+      <section class="cv-section">
+        <h2>{content.sections.languages}</h2>
+        <div class="cv-languages">
+          {content.languagesList.map(([name, level]) => <span><strong>{name}</strong> — {level}</span>)}
+        </div>
+      </section>
+
+      <section class="cv-section">
+        <h2>{content.sections.projects}</h2>
+        {content.projects.map((project) => (
+          <div class="cv-entry">
+            <div class="cv-entry-header">
+              <h3>{project.title}</h3>
+              <span class="cv-date">{project.date}</span>
+            </div>
+            <p>{project.description}</p>
+          </div>
+        ))}
+      </section>
+    </div>
+    <div class="cv-actions" aria-label="CV actions">
+      <a href={backHref} class="cv-action-button" aria-label={content.backLabel} title={content.backLabel}>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M19 12H5" />
+          <path d="m12 19-7-7 7-7" />
+        </svg>
+      </a>
+      <button type="button" class="cv-action-button cv-action-button--primary" onclick="window.print()" aria-label={content.downloadLabel} title={content.downloadLabel}>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M12 3v12" />
+          <path d="m7 10 5 5 5-5" />
+          <path d="M5 21h14" />
+        </svg>
+      </button>
+    </div>
+  </body>
+</html>

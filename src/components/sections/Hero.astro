@@ -3,16 +3,17 @@ import TerminalCard from "~/components/ui/TerminalCard.astro";
 
 interface Props {
   t: (key: string) => string;
+  lang: string;
 }
 
-const { t } = Astro.props;
+const { t, lang } = Astro.props;
 
 const techBadges = ["PHP", "Laravel", "React", "Next.js", "TypeScript", "Docker"];
 
 const socialLinks = [
   { label: "GitHub", url: "https://github.com/AntonioPtnR" },
   { label: "LinkedIn", url: "https://www.linkedin.com/in/antoniopatonrico/" },
-  { label: "CV", url: "/cv" },
+  { label: "CV", url: `/${lang}/cv` },
 ];
 ---
 
