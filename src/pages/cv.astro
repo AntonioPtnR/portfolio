@@ -20,6 +20,107 @@
         line-height: 1.6;
         font-size: 11pt;
       }
+      .cv-actions {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        max-width: 800px;
+        margin: 1.5rem auto 2rem;
+        padding: 0 2rem;
+      }
+      .cv-action-button {
+        appearance: none;
+        position: relative;
+        isolation: isolate;
+        border: 1px solid #cbd5e1;
+        border-radius: 9999px;
+        background: #ffffff;
+        color: #0f172a;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 3.25rem;
+        height: 3.25rem;
+        cursor: pointer;
+        text-decoration: none;
+        box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+        transform: translateY(8px);
+        opacity: 0;
+        animation: cvActionFadeUp 420ms ease-out forwards;
+        transition:
+          transform 180ms ease,
+          box-shadow 180ms ease,
+          opacity 180ms ease,
+          background-color 180ms ease,
+          border-color 180ms ease;
+      }
+      .cv-action-button::after {
+        content: "";
+        position: absolute;
+        inset: -0.2rem;
+        border-radius: inherit;
+        opacity: 0;
+        z-index: -1;
+        pointer-events: none;
+        transition: opacity 180ms ease;
+      }
+      .cv-action-button--primary {
+        background: #2563eb;
+        border-color: #2563eb;
+        color: #fff;
+      }
+      .cv-action-button--primary::after {
+        background: radial-gradient(circle, rgba(37, 99, 235, 0.28) 0%, rgba(37, 99, 235, 0) 70%);
+      }
+      .cv-action-button:hover {
+        opacity: 0.98;
+        transform: translateY(-2px);
+        box-shadow: 0 12px 28px rgba(15, 23, 42, 0.14);
+      }
+      .cv-action-button:active {
+        transform: scale(0.97);
+      }
+      .cv-action-button:nth-child(2) {
+        animation-delay: 80ms;
+      }
+      .cv-action-button--primary {
+        animation: cvActionFadeUp 420ms ease-out forwards;
+      }
+      .cv-action-button--primary:hover {
+        transform: translateY(-3px) scale(1.08);
+        box-shadow: 0 16px 34px rgba(37, 99, 235, 0.3);
+      }
+      .cv-action-button--primary:hover svg {
+        transform: scale(1.08);
+      }
+      .cv-action-button--primary:hover::after,
+      .cv-action-button--primary:focus-visible::after {
+        opacity: 1;
+      }
+      .cv-action-button svg {
+        width: 1.25rem;
+        height: 1.25rem;
+        transition: transform 180ms ease;
+      }
+      @keyframes cvActionFadeUp {
+        from {
+          opacity: 0;
+          transform: translateY(8px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .cv-action-button,
+        .cv-action-button--primary {
+          animation: none;
+          opacity: 1;
+          transform: none;
+          transition: none;
+        }
+      }
       .cv-page {
         max-width: 800px;
         margin: 0 auto;
@@ -65,8 +166,18 @@
       /* Print */
       @media print {
         html, body { background: #fff !important; }
+        .cv-actions { display: none !important; }
         .cv-page { box-shadow: none; padding: 0; max-width: 100%; min-height: 0; }
         @page { margin: 1.4cm 1.6cm; size: A4; }
+      }
+
+      @media (max-width: 640px) {
+        .cv-actions {
+          padding: 0 1rem;
+        }
+        .cv-page {
+          padding: 2rem 1rem 3rem;
+        }
       }
     </style>
   </head>
@@ -180,7 +291,6 @@
         <h2>Idiomas</h2>
         <div class="cv-languages">
           <span><strong>Español</strong> — Nativo</span>
-          <span><strong>Catalán</strong> — Nativo</span>
           <span><strong>Inglés</strong> — B1 (Cambridge)</span>
         </div>
       </section>
@@ -203,6 +313,27 @@
           <p>Automatización del cuaderno de campo digital para agricultores. TypeScript, Next.js, PostgreSQL, Drizzle ORM.</p>
         </div>
       </section>
+    </div>
+    <div class="cv-actions" aria-label="Acciones del CV">
+      <a href="/es/" class="cv-action-button" aria-label="Volver al portfolio" title="Volver al portfolio">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M19 12H5" />
+          <path d="m12 19-7-7 7-7" />
+        </svg>
+      </a>
+      <button
+        type="button"
+        class="cv-action-button cv-action-button--primary"
+        onclick="window.print()"
+        aria-label="Descargar CV en PDF"
+        title="Descargar CV en PDF"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M12 3v12" />
+          <path d="m7 10 5 5 5-5" />
+          <path d="M5 21h14" />
+        </svg>
+      </button>
     </div>
   </body>
 </html>
