@@ -25,6 +25,7 @@ export const ui = {
     'nav.abrir-menu': 'Abrir menú de navegación',
     // Hero
     'hero.hola-soy': 'Hola, soy',
+    'hero.nombre': 'Antonio Patón Rico',
     'hero.ingeniero-de': 'Ingeniero de',
     'hero.software': 'Software',
     'hero.bio': 'Diseño y desarrollo aplicaciones web modernas combinando una buena experiencia de usuario con arquitecturas robustas. Del frontend con React al backend con Laravel, pasando por la inteligencia artificial aplicada con agentes y LLMs.',
@@ -103,6 +104,7 @@ export const ui = {
     'nav.descargar-cv': 'Download CV',
     'nav.abrir-menu': 'Open navigation menu',
     'hero.hola-soy': "Hi, I'm",
+    'hero.nombre': 'Antonio Patón Rico',
     'hero.ingeniero-de': 'Software',
     'hero.software': 'Engineer',
     'hero.bio': "I design and build modern web applications that combine great user experience with robust architectures. From React frontends to Laravel backends, including applied AI with agents and LLMs.",
@@ -168,6 +170,7 @@ export const ui = {
     'nav.descargar-cv': 'Descarregar CV',
     'nav.abrir-menu': 'Obrir menú de navegació',
     'hero.hola-soy': 'Hola, soc',
+    'hero.nombre': 'Antonio Patón Rico',
     'hero.ingeniero-de': 'Enginyer de',
     'hero.software': 'Software',
     'hero.bio': "Disseny i desenvolupament d'aplicacions web modernes que combinen una bona experiència d'usuari amb arquitectures robustes. Del frontend amb React al backend amb Laravel, passant per la intel·ligència artificial aplicada amb agents i LLMs.",

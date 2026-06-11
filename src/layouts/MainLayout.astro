@@ -7,6 +7,11 @@ import { languages, defaultLang, ogLocales } from "~/i18n/ui";
 const { lang, t } = Astro.props;
 const siteName = "Antonio Patón Rico";
 const siteShortName = "Antonio Patón";
+const hreflangLocales: Record<keyof typeof languages, string> = {
+  es: "es-ES",
+  en: "en",
+  ca: "ca-ES",
+};
 
 // Site base URL (falls back to hardcoded if Astro.site unavailable)
 const site = Astro.site ?? new URL("https://antoniopr.pages.dev");
@@ -22,7 +27,7 @@ const pathWithoutLang = pathname.startsWith(langPrefix)
   : pathname;
 
 const alternates = Object.keys(languages).map((code) => ({
-  hreflang: code,
+  hreflang: hreflangLocales[code as keyof typeof languages],
   href: new URL(`/${code}${pathWithoutLang}`, site).href,
 }));
 
@@ -38,6 +43,7 @@ const ogLocaleAlternates = Object.keys(languages)
 
 // OG Image absolute URL
 const ogImage = new URL("/og-image.jpg", site).href;
+const languageProfileUrl = new URL(`/${lang}/`, site).href;
 
 // JSON-LD structured data
 const jsonLd = {
@@ -47,7 +53,24 @@ const jsonLd = {
       "@type": "Person",
       name: siteName,
       jobTitle: t("about.subtitulo"),
-      url: site.href,
+      url: languageProfileUrl,
+      email: "mailto:antoniopr009@gmail.com",
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: "Ciudad Real",
+        addressCountry: "ES",
+      },
+      knowsAbout: [
+        "Software Engineering",
+        "Frontend Development",
+        "Backend Development",
+        "React",
+        "Next.js",
+        "TypeScript",
+        "Laravel",
+        "Applied AI",
+        "Multi-agent Systems",
+      ],
       sameAs: [
         "https://github.com/AntonioPtnR",
         "https://linkedin.com/in/antoniopatonrico",
@@ -59,7 +82,7 @@ const jsonLd = {
       name: siteName,
       alternateName: siteShortName,
       description: t("seo.descripcion"),
-      inLanguage: lang,
+      inLanguage: hreflangLocales[lang as keyof typeof languages],
     },
   ],
 };

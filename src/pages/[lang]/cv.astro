@@ -1,6 +1,12 @@
 ---
 import { languages } from "~/i18n/ui";
 
+const hreflangLocales: Record<keyof typeof languages, string> = {
+  es: "es-ES",
+  en: "en",
+  ca: "ca-ES",
+};
+
 export function getStaticPaths() {
   return Object.keys(languages).map((lang) => ({ params: { lang } }));
 }
@@ -237,6 +243,14 @@ const cvContent = {
 
 const content = cvContent[lang as keyof typeof cvContent] ?? cvContent.es;
 const backHref = `/${lang}/`;
+const site = Astro.site ?? new URL("https://antoniopr.pages.dev");
+const canonical = new URL(`/${lang}/cv`, site).href;
+const alternates = Object.keys(languages).map((code) => ({
+  hreflang: hreflangLocales[code as keyof typeof languages],
+  href: new URL(`/${code}/cv`, site).href,
+}));
+const xDefaultHref = new URL("/es/cv", site).href;
+const ogImage = new URL("/og-image.jpg", site).href;
 const experience = content.experience as ReadonlyArray<{
   role: string;
   date: string;
@@ -250,7 +264,24 @@ const experience = content.experience as ReadonlyArray<{
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={content.profile} />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href={canonical} />
+    {alternates.map((alt) => (
+      <link rel="alternate" hreflang={alt.hreflang} href={alt.href} />
+    ))}
+    <link rel="alternate" hreflang="x-default" href={xDefaultHref} />
     <title>{content.pageTitle}</title>
+    <meta property="og:title" content={content.pageTitle} />
+    <meta property="og:description" content={content.profile} />
+    <meta property="og:type" content="profile" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:site_name" content="Antonio Patón Rico" />
+    <meta property="og:image" content={ogImage} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={content.pageTitle} />
+    <meta name="twitter:description" content={content.profile} />
+    <meta name="twitter:image" content={ogImage} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
