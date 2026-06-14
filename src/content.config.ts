@@ -1,7 +1,9 @@
-import { defineCollection, z } from "astro:content";
+import { defineCollection } from "astro:content";
+import { glob } from "astro/loaders";
+import { z } from "astro/zod";
 
 const educationCollection = defineCollection({
-	type: "content",
+	loader: glob({ pattern: "**/*.md", base: "./src/content/education" }),
 	schema: z.object({
 		title: z.string(),
 		institution: z.string(),
@@ -14,7 +16,7 @@ const educationCollection = defineCollection({
 });
 
 const experienceCollection = defineCollection({
-	type: "content",
+	loader: glob({ pattern: "**/*.md", base: "./src/content/experience" }),
 	schema: z.object({
 		role: z.string(),
 		company: z.string(),
@@ -28,7 +30,7 @@ const experienceCollection = defineCollection({
 });
 
 const projectsCollection = defineCollection({
-	type: "content",
+	loader: glob({ pattern: "**/*.md", base: "./src/content/projects" }),
 	schema: z.object({
 		title: z.string(),
 		description: z.string(),
