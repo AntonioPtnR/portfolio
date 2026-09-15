@@ -25,3 +25,5 @@ dist/
 .DS_Store
 Thumbs.db
 *:Zone.Identifier
+# Local Pi runtime state
+.atl/
