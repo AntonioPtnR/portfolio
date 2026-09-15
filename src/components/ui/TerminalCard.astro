@@ -1,6 +1,8 @@
 ---
+import type { TranslateFn } from "~/i18n/utils";
+
 interface Props {
-  t: (key: string) => string;
+  t: TranslateFn;
 }
 
 const { t } = Astro.props;

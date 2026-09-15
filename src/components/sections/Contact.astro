@@ -1,9 +1,10 @@
 ---
 import ContactForm from "~/components/ui/ContactForm";
+import type { Lang, TranslateFn } from "~/i18n/utils";
 
 interface Props {
-  lang: string;
-  t: (key: string) => string;
+  lang: Lang;
+  t: TranslateFn;
 }
 
 const { lang, t } = Astro.props;

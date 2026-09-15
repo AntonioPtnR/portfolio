@@ -1,9 +1,10 @@
 ---
 import TerminalCard from "~/components/ui/TerminalCard.astro";
+import type { Lang, TranslateFn } from "~/i18n/utils";
 
 interface Props {
-  t: (key: string) => string;
-  lang: string;
+  t: TranslateFn;
+  lang: Lang;
 }
 
 const { t, lang } = Astro.props;

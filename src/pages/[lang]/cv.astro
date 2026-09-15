@@ -1,5 +1,6 @@
 ---
 import { languages } from "~/i18n/ui";
+import { toLang } from "~/i18n/utils";
 
 const hreflangLocales: Record<keyof typeof languages, string> = {
   es: "es-ES",
@@ -7,11 +8,19 @@ const hreflangLocales: Record<keyof typeof languages, string> = {
   ca: "ca-ES",
 };
 
+interface CvExperienceEntry {
+  role: string;
+  date: string;
+  company: string;
+  bullets?: readonly string[];
+}
+
 export function getStaticPaths() {
   return Object.keys(languages).map((lang) => ({ params: { lang } }));
 }
 
-const { lang = "es" } = Astro.params;
+const { lang: rawLang = "es" } = Astro.params;
+const lang = toLang(rawLang);
 
 const cvContent = {
   es: {
@@ -241,22 +250,17 @@ const cvContent = {
   },
 } as const;
 
-const content = cvContent[lang as keyof typeof cvContent] ?? cvContent.es;
+const content = cvContent[lang] ?? cvContent.es;
 const backHref = `/${lang}/`;
 const site = Astro.site ?? new URL("https://antoniopr.pages.dev");
 const canonical = new URL(`/${lang}/cv`, site).href;
 const alternates = Object.keys(languages).map((code) => ({
-  hreflang: hreflangLocales[code as keyof typeof languages],
+  hreflang: hreflangLocales[toLang(code)],
   href: new URL(`/${code}/cv`, site).href,
 }));
 const xDefaultHref = new URL("/es/cv", site).href;
 const ogImage = new URL("/og-image.jpg", site).href;
-const experience = content.experience as ReadonlyArray<{
-  role: string;
-  date: string;
-  company: string;
-  bullets?: readonly string[];
-}>;
+const experience: readonly CvExperienceEntry[] = content.experience;
 ---
 
 <!doctype html>

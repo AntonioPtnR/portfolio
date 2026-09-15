@@ -1,14 +1,21 @@
 ---
 import ThemeToggle from "~/components/ui/ThemeToggle";
 import { languages } from "~/i18n/ui";
+import { isLang } from "~/i18n/utils";
+import type { Lang, TranslateFn } from "~/i18n/utils";
 
 interface Props {
-  lang: string;
-  t: (key: string) => string;
+  lang: Lang;
+  t: TranslateFn;
 }
 
 const { lang, t } = Astro.props;
-const langEntries = Object.entries(languages);
+
+// `Object.keys` is typed as `string[]`; the guard narrows it at runtime
+// instead of asserting the type away.
+const langEntries: ReadonlyArray<[Lang, string]> = Object.keys(languages)
+  .filter(isLang)
+  .map((code) => [code, languages[code]]);
 
 const flagSvg: Record<string, string> = {
   es: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 12" class="h-3 w-[18px]"><rect width="18" height="4" fill="#C60B1E"/><rect y="4" width="18" height="4" fill="#FFC400"/><rect y="8" width="18" height="4" fill="#C60B1E"/></svg>`,

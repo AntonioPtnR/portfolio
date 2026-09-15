@@ -1,13 +1,13 @@
 import { useState } from "react";
-import { ui } from "~/i18n/ui";
+import { ui, defaultLang } from "~/i18n/ui";
+import type { Lang, TranslationKey } from "~/i18n/utils";
 
 interface Props {
-  lang: string;
+  lang: Lang;
 }
 
-function t(lang: string, key: string): string {
-  const dict = ui[lang as keyof typeof ui] ?? ui.es;
-  return (dict as Record<string, string>)[key] ?? (ui.es as Record<string, string>)[key] ?? key;
+function t(lang: Lang, key: TranslationKey): string {
+  return ui[lang][key] ?? ui[defaultLang][key] ?? key;
 }
 
 export default function ContactForm({ lang }: Props) {

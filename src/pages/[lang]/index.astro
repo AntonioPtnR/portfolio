@@ -6,16 +6,16 @@ import About from "~/components/sections/About.astro";
 import Timeline from "~/components/sections/Timeline.astro";
 import Projects from "~/components/sections/Projects.astro";
 import Contact from "~/components/sections/Contact.astro";
-import { useTranslations } from "~/i18n/utils";
+import { useTranslations, toLang } from "~/i18n/utils";
 import { languages } from "~/i18n/ui";
 
 export function getStaticPaths() {
   return Object.keys(languages).map((lang) => ({ params: { lang } }));
 }
 
-const { lang } = Astro.params;
+const lang = toLang(Astro.params.lang);
 
-const t = useTranslations(lang as keyof typeof import("~/i18n/ui").ui) as unknown as (key: string) => string;
+const t = useTranslations(lang);
 
 const allEducation = await getCollection("education");
 const allExperience = await getCollection("experience");

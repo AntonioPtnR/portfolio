@@ -1,4 +1,6 @@
 ---
+import type { TranslateFn } from "~/i18n/utils";
+
 interface Project {
   title: string;
   description: string;
@@ -13,7 +15,7 @@ interface Project {
 
 interface Props {
   projects: Project[];
-  t: (key: string) => string;
+  t: TranslateFn;
 }
 
 const { projects, t } = Astro.props;
@@ -140,12 +142,12 @@ const filterValues: string[] = ["all", ...allCategories.sort().map((c) => c.toLo
 
       // Show/hide cards
       projectCards.forEach((card) => {
-        const el = card as HTMLElement;
-        const cat = el.getAttribute("data-category");
+        if (!(card instanceof HTMLElement)) return;
+        const cat = card.getAttribute("data-category");
         if (filter === "all" || cat === filter) {
-          el.style.display = "";
+          card.style.display = "";
         } else {
-          el.style.display = "none";
+          card.style.display = "none";
         }
       });
     });

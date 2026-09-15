@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
+import type { Lang } from "~/i18n/utils";
 
 type Theme = "light" | "dark";
 
 interface Props {
-  lang: string;
+  lang: Lang;
 }
 
 function getSystemTheme(): Theme {
